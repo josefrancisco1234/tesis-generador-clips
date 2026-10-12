@@ -1,0 +1,37 @@
+# Perfil para la PC con GPU NVIDIA. Uso:
+#   python run_all.py --config configs/gpu.yaml
+#   python -m src.pipeline "URL" --config configs/gpu.yaml
+# Hereda de default.yaml mediante `extends` (D-030) y sólo redefine lo que cambia respecto del
+# perfil de CPU; se usa pasándolo con --config.
+extends: configs/default.yaml
+
+transcribe:
+  device: "cuda"
+  compute_type: "auto"          # float32 en GTX 16xx, float16 en RTX 20xx+, int8_float32 en GTX 10xx (D-036)
+  model_dataset: "base"         # D-033: sigue en base hasta cerrar la adquisición; luego un barrido único con "small"
+  model_inference: "medium"
+  compute_type_inference: "int8_float32"   # D-037: inferencia por velocidad (26 s vs 147 s en fp32); el dataset sigue en compute_type
+  cpu_threads: 8
+  beam_size: 1
+  vad_filter: true
+  language: null
+
+features:
+  device: "cuda"
+  speech_embed:                 # grupo U (HuBERT) — inviable en CPU, ver docs/02 §7
+    enabled: true
+    model: "facebook/hubert-base-ls960"
+    layer: 10                   # capa usada por Rhapsody (COLM 2025)
+    chunk_s: 10.0
+    batch_size: 1               # trozos por pasada; agrupar no acelera en la 1660 SUPER (D-035)
+    n_components: 32
+  groups: [K, S, A, H, F, E, L, U]
+  sentiment_model: "lxyuan/distilbert-base-multilingual-cased-sentiments-student"
+  sentiment_batch: 64
+  audio_hop: 512
+  hook_window_s: 3.0
+  hook_words: 15
+
+dataset_youtube:
+  per_query: 50                       # D-043: resultados más profundos de las MISMAS consultas (antes 25)
+  target_videos: {es: 250, en: 250}   # con GPU la transcripción deja de ser el cuello de botella

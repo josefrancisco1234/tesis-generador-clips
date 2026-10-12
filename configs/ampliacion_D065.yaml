@@ -1,0 +1,75 @@
+# Ampliacion D-065: cohorte fresca 2 (consultas nuevas respecto a D-050).
+extends: configs/default.yaml
+transcribe:
+  device: cuda
+  compute_type: auto
+  model_dataset: base
+  model_inference: medium
+  compute_type_inference: int8_float32
+  cpu_threads: 8
+  beam_size: 1
+  vad_filter: true
+  language: null
+features:
+  device: cuda
+  speech_embed:
+    enabled: true
+    model: facebook/hubert-base-ls960
+    layer: 10
+    chunk_s: 10.0
+    batch_size: 1
+    n_components: 32
+  groups:
+  - K
+  - S
+  - A
+  - H
+  - F
+  - E
+  - L
+  - U
+  sentiment_model: lxyuan/distilbert-base-multilingual-cased-sentiments-student
+  sentiment_batch: 64
+  audio_hop: 512
+  hook_window_s: 3.0
+  hook_words: 15
+dataset_youtube:
+  per_query: 40
+  target_videos:
+    es: 350
+    en: 346
+  queries:
+    es:
+    - podcast de emprendimiento digital y marketing
+    - entrevista completa a actor
+    - podcast de salud mental y ansiedad
+    - podcast de finanzas e inversiones en espanol
+    - conversacion completa con escritor
+    - podcast de ciencia y divulgacion episodio completo
+    - debate politico completo
+    - podcast de maternidad y crianza
+    - entrevista completa a futbolista
+    - podcast de filosofia episodio completo
+    - stand up comedy completo mexicano
+    - charla completa de liderazgo
+    - podcast de crimen real latinoamericano
+    - podcast de tecnologia e inteligencia artificial
+    - entrevista completa a influencer
+    - podcast de historia de latinoamerica
+    en:
+    - mental health podcast full episode
+    - interview with actor full episode
+    - business strategy podcast full episode
+    - science communication podcast full episode
+    - political debate full length
+    - parenting advice podcast full episode
+    - football player interview full length
+    - philosophy lecture full
+    - stand up special full length
+    - leadership talk full
+    - true crime podcast long form
+    - AI and technology podcast long form
+    - influencer interview full podcast
+    - history documentary podcast long
+    - fitness and nutrition podcast full episode
+    - relationships and dating podcast full

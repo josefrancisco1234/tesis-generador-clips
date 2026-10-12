@@ -1,0 +1,75 @@
+# Ampliacion D-050 (cohorte fresca ~100 videos; targets reducidos por costo de descarga).
+extends: configs/default.yaml
+transcribe:
+  device: cuda
+  compute_type: auto
+  model_dataset: base
+  model_inference: medium
+  compute_type_inference: int8_float32
+  cpu_threads: 8
+  beam_size: 1
+  vad_filter: true
+  language: null
+features:
+  device: cuda
+  speech_embed:
+    enabled: true
+    model: facebook/hubert-base-ls960
+    layer: 10
+    chunk_s: 10.0
+    batch_size: 1
+    n_components: 32
+  groups:
+  - K
+  - S
+  - A
+  - H
+  - F
+  - E
+  - L
+  - U
+  sentiment_model: lxyuan/distilbert-base-multilingual-cased-sentiments-student
+  sentiment_batch: 64
+  audio_hop: 512
+  hook_window_s: 3.0
+  hook_words: 15
+dataset_youtube:
+  per_query: 40
+  target_videos:
+    es: 300
+    en: 296
+  queries:
+    es:
+    - podcast de politica y actualidad episodio completo
+    - entrevista completa a empresario
+    - podcast de relaciones y pareja
+    - podcast de desarrollo personal y espiritualidad
+    - podcast de cine y series episodio completo
+    - charla completa sobre inteligencia artificial
+    - entrevista larga a cientifico
+    - podcast de videojuegos en espanol
+    - mesa redonda completa economia
+    - podcast de cocina y gastronomia
+    - podcast de emprendedores latinoamerica
+    - entrevista completa a politico
+    - podcast de educacion y universidad
+    - stand up completo humorista latinoamericano
+    - podcast de viajes y aventura
+    - podcast de religion y fe episodio completo
+    en:
+    - political podcast full episode
+    - celebrity interview full episode
+    - relationship advice podcast full episode
+    - self improvement podcast full episode
+    - crypto and finance podcast full episode
+    - artificial intelligence interview full conversation
+    - medical doctor podcast full episode
+    - comedian interview full length
+    - entrepreneur masterclass full talk
+    - documentary style podcast full episode
+    - mma fighter interview full podcast
+    - book author interview full podcast
+    - cooking and food podcast full episode
+    - travel podcast full episode
+    - religion and spirituality podcast full episode
+    - education and learning podcast full episode

@@ -1,0 +1,156 @@
+# Configuración principal del sistema de clips.
+# Todas las rutas relativas se resuelven contra paths.data_root (fuera de OneDrive).
+
+seed: 42
+
+paths:
+  data_root: "C:/tesis_data"          # datos pesados: audio, transcripciones, features
+  raw: "${data_root}/data/raw"        # audio/video descargado (se puede borrar tras extraer features)
+  interim: "${data_root}/data/interim"  # transcripciones, heatmaps, JSON intermedios
+  processed: "${data_root}/data/processed"  # tablas de features/etiquetas (parquet)
+  cache: "${data_root}/cache"         # caché del LLM y de embeddings
+  outputs: "${data_root}/outputs"     # clips renderizados
+  models_ext: "${data_root}/models_ext"  # pesos externos (detector de rostros)
+  models: "models"                    # modelos entrenados (dentro del repo; son livianos)
+  manifests: "data/manifests"         # listas de IDs de video (dentro del repo)
+  reports: "reports"                  # métricas y figuras generadas por run_all.py
+
+logging:
+  level: INFO
+  file: "${data_root}/logs/clipper.log"
+
+ingest:
+  audio_sr: 16000
+  max_video_height: 1080
+  youtube_audio_format: "139/140/bestaudio[abr<=96]"
+  youtube_video_format: "bv*[height<=1080][ext=mp4]+ba[ext=m4a]/b[height<=1080]"
+  sleep_between_requests: 2.0
+  block_max_consecutive: 2            # D-042: tras N bloqueos anti-bot seguidos, pausa
+  block_pause_s: 1800                 # 30 min
+
+transcribe:
+  model_inference: "small"      # usado en el pipeline de inferencia
+  model_dataset: "base"         # usado para construir el dataset (RTF≈0.08 en CPU)
+  device: "auto"                # auto | cpu | cuda  (auto = cuda si hay GPU NVIDIA)
+  compute_type: "auto"          # auto: int8 en CPU; int8_float32 en Pascal (GTX 10xx); float16 en RTX 20xx+
+  cpu_threads: 8
+  beam_size: 1
+  vad_filter: true
+  language: null                # null = autodetección
+
+segment:
+  min_clip_s: 15
+  max_clip_s: 90
+  target_durations: [20, 40, 60]
+  sentence_max_words: 40
+  sentence_pause_split_s: 0.9
+  fixed_window_s: 20            # línea base "Minimal Clips"
+  train_start_stride: 2         # en entrenamiento se toma 1 de cada N oraciones como inicio
+  max_candidates_per_video_train: 400
+
+keywords:
+  passage_s: 60                 # tamaño de pasaje para el TF-IDF de KVSUM
+  top_n_video: 20
+  keybert_ngram_range: [1, 2]
+  embedding_model: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+
+features:
+  device: "auto"                # auto | cpu | cuda — para sentimiento y PANNs
+  sentiment_model: "lxyuan/distilbert-base-multilingual-cased-sentiments-student"
+  sentiment_batch: 32
+  audio_hop: 512
+  hook_window_s: 3.0
+  hook_words: 15
+  groups: [K, S, A, H, F, E, L]   # iteración 2: + eventos de audio (PANNs) y lingüísticas (Reddy et al.)
+
+labels:
+  gt_threshold: 0.5             # definición de highlight de Rhapsody
+  max_n_gt: 20
+  n_grades: 5                   # relevancia 0..4 por quintiles dentro del video
+  relevant_overlap: 0.5         # un clip es "relevante" si ≥50 % de su duración cae en bins highlight
+
+ranking:
+  split: {train: 0.7, val: 0.15, test: 0.15, group_by: "channel_id"}
+  lgbm:
+    objective: "lambdarank"
+    metric: "ndcg"
+    eval_at: [5, 10]
+    learning_rate: 0.05
+    num_leaves: 31
+    min_data_in_leaf: 20
+    feature_fraction: 0.8
+    bagging_fraction: 0.8
+    bagging_freq: 1
+    lambdarank_truncation_level: 20
+    num_boost_round: 1000
+    early_stopping_rounds: 50
+    verbose: -1
+  mlp:
+    hidden: [64, 32]
+    dropout: 0.1
+    lr: 0.001
+    epochs: 40
+    pairs_per_group: 256
+  nms_iou: 0.5                  # NMS para evaluación (IoU)
+  output_overlap: 0.3           # NMS para la salida: solapamiento máx. sobre el clip más corto
+  top_n_llm: 15
+  top_k_output: 8
+
+context:
+  provider: "anthropic"         # anthropic | openai | ollama | none (si falta la API key se usa none)
+  model:
+    anthropic: "claude-haiku-4-5-20251001"
+    openai: "gpt-4o-mini"
+    ollama: "qwen2.5:3b-instruct"
+  temperature: 0.0
+  max_tokens: 600
+  ollama_url: "http://localhost:11434"
+  non_self_contained_penalty: 10   # puntos restados al score 0-99
+
+render:
+  width: 1080
+  height: 1920
+  fps: 30
+  sample_fps: 5
+  face_detector: "mediapipe"    # mediapipe | yunet
+  smoothing_alpha: 0.15
+  deadzone_frac: 0.06
+  speaker_switch_min_s: 1.2
+  scene_snap_s: 1.5
+  captions:
+    font: "Arial Black"
+    font_size: 78
+    words_per_line: 3
+    uppercase: true
+    primary_color: "&H0000E5FF"    # amarillo (BGR en ASS)
+    secondary_color: "&H0066FF33"  # verde
+    base_color: "&H00FFFFFF"
+    max_highlight_ratio: 0.25
+
+dataset_youtube:
+  min_duration_s: 900
+  max_duration_s: 4500
+  per_query: 25
+  # v1 (2026-09-22): 40/40 con las 6+6 primeras consultas. v2 (iteración 2): 120/120 con consultas
+  # adicionales por género y país para diversificar dominio (D-021).
+  target_videos: {es: 120, en: 120}
+  queries:
+    es: ["podcast entrevista completa", "podcast episodio completo conversación",
+         "entrevista completa podcast emprendimiento", "podcast de ciencia en español episodio",
+         "podcast de historia episodio completo", "charla TEDx en español",
+         "podcast peruano entrevista", "podcast mexicano episodio completo", "podcast argentino entrevista completa",
+         "podcast colombiano episodio", "podcast España entrevista completa", "podcast chileno episodio completo",
+         "podcast de negocios y finanzas personales", "podcast de tecnología en español", "podcast de salud y nutrición",
+         "podcast de crimen real en español", "podcast de fútbol conversación", "podcast de psicología episodio",
+         "stand up comedy completo en español", "conferencia completa en español", "clase magistral universidad completa",
+         "debate completo en español", "entrevista completa a deportista", "entrevista completa a músico",
+         "podcast de humor episodio completo", "podcast de misterio y paranormal"]
+    en: ["full podcast episode interview", "podcast full episode conversation",
+         "long form interview podcast", "science podcast full episode",
+         "business podcast full episode", "comedy podcast full episode",
+         "true crime podcast full episode", "sports podcast full episode", "health podcast full episode",
+         "tech podcast full episode", "history podcast full episode", "psychology podcast full episode",
+         "personal finance podcast episode", "startup founder interview full", "athlete interview full podcast",
+         "musician interview full podcast", "stand up comedy full special", "university lecture full",
+         "debate full video", "keynote speech full", "philosophy podcast full episode", "film podcast full episode",
+         "gaming podcast full episode", "parenting podcast full episode"]

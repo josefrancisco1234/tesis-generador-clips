@@ -1,0 +1,361 @@
+{
+"order": [
+"k_kvsum_mean",
+"k_kvsum_max",
+"k_kvsum_local",
+"k_top_terms_pm",
+"k_content_ratio",
+"k_novelty",
+"k_keybert_sim",
+"k_keyphrase_pm",
+"k_noun_chunks_ps",
+"s_intensity_mean",
+"s_intensity_max",
+"s_pos_mean",
+"s_neg_mean",
+"s_polarity_mean",
+"s_polarity_std",
+"s_questions_pm",
+"s_exclaim_pm",
+"s_second_person",
+"s_first_person",
+"s_numbers",
+"s_intensifiers",
+"s_hook_words",
+"s_laughs",
+"a_rms_mean",
+"a_rms_p95",
+"a_rms_std",
+"a_pitch_std",
+"a_pitch_range",
+"a_voiced_ratio",
+"a_energy_delta",
+"a_speech_rate",
+"a_pause_ratio",
+"a_long_pauses_pm",
+"h_rms_onset",
+"h_question",
+"h_number",
+"h_second_person",
+"h_hook_word",
+"h_contrast",
+"h_first_sentence_s",
+"h_first_intensity",
+"h_first_keybert",
+"f_starts_dangling",
+"f_ends_complete",
+"f_coherence_mean",
+"f_coherence_min",
+"f_topic_drift",
+"f_n_sentences",
+"f_duration",
+"f_filler_rate",
+"f_word_conf",
+"l_entropy",
+"l_type_token",
+"l_pron_12_vs_3",
+"l_fillers",
+"l_silence",
+"l_word_len",
+"e_laugh_max",
+"e_laugh_mean",
+"e_applause_max",
+"e_applause_mean",
+"e_cheering_max",
+"e_cheering_mean",
+"e_music_max",
+"e_music_mean",
+"e_speech_max",
+"e_speech_mean",
+"e_laugh_frac",
+"e_laugh_tail",
+"e_laugh_after",
+"e_applause_after"
+],
+"loc": {
+"k_kvsum_mean": [
+"src/features/builder.py",
+113
+],
+"k_kvsum_max": [
+"src/features/builder.py",
+114
+],
+"k_kvsum_local": [
+"src/features/builder.py",
+121
+],
+"k_top_terms_pm": [
+"src/features/builder.py",
+123
+],
+"k_content_ratio": [
+"src/features/builder.py",
+124
+],
+"k_novelty": [
+"src/features/builder.py",
+125
+],
+"k_keybert_sim": [
+"src/features/builder.py",
+129
+],
+"k_keyphrase_pm": [
+"src/features/builder.py",
+133
+],
+"k_noun_chunks_ps": [
+"src/features/builder.py",
+134
+],
+"s_pos_mean": [
+"src/features/builder.py",
+146
+],
+"s_neg_mean": [
+"src/features/builder.py",
+146
+],
+"s_polarity_mean": [
+"src/features/builder.py",
+146
+],
+"s_polarity_std": [
+"src/features/builder.py",
+146
+],
+"s_intensity_mean": [
+"src/features/builder.py",
+142
+],
+"s_intensity_max": [
+"src/features/builder.py",
+142
+],
+"s_questions_pm": [
+"src/features/builder.py",
+148
+],
+"s_exclaim_pm": [
+"src/features/builder.py",
+149
+],
+"s_second_person": [
+"src/features/builder.py",
+151
+],
+"s_first_person": [
+"src/features/builder.py",
+152
+],
+"s_numbers": [
+"src/features/builder.py",
+153
+],
+"s_intensifiers": [
+"src/features/builder.py",
+154
+],
+"s_hook_words": [
+"src/features/builder.py",
+155
+],
+"s_laughs": [
+"src/features/builder.py",
+156
+],
+"a_rms_mean": [
+"src/features/builder.py",
+171
+],
+"a_rms_p95": [
+"src/features/builder.py",
+172
+],
+"a_rms_std": [
+"src/features/builder.py",
+173
+],
+"a_pitch_std": [
+"src/features/builder.py",
+174
+],
+"a_pitch_range": [
+"src/features/builder.py",
+175
+],
+"a_voiced_ratio": [
+"src/features/builder.py",
+176
+],
+"a_energy_delta": [
+"src/features/builder.py",
+177
+],
+"a_speech_rate": [
+"src/features/builder.py",
+178
+],
+"a_pause_ratio": [
+"src/features/builder.py",
+181
+],
+"a_long_pauses_pm": [
+"src/features/builder.py",
+182
+],
+"h_rms_onset": [
+"src/features/builder.py",
+188
+],
+"h_question": [
+"src/features/builder.py",
+193
+],
+"h_number": [
+"src/features/builder.py",
+194
+],
+"h_second_person": [
+"src/features/builder.py",
+195
+],
+"h_hook_word": [
+"src/features/builder.py",
+196
+],
+"h_contrast": [
+"src/features/builder.py",
+197
+],
+"h_first_sentence_s": [
+"src/features/builder.py",
+198
+],
+"h_first_intensity": [
+"src/features/builder.py",
+199
+],
+"h_first_keybert": [
+"src/features/builder.py",
+200
+],
+"f_starts_dangling": [
+"src/features/builder.py",
+204
+],
+"f_ends_complete": [
+"src/features/builder.py",
+205
+],
+"f_coherence_mean": [
+"src/features/builder.py",
+209
+],
+"f_coherence_min": [
+"src/features/builder.py",
+209
+],
+"f_topic_drift": [
+"src/features/builder.py",
+211
+],
+"f_n_sentences": [
+"src/features/builder.py",
+218
+],
+"f_duration": [
+"src/features/builder.py",
+219
+],
+"f_filler_rate": [
+"src/features/builder.py",
+221
+],
+"f_word_conf": [
+"src/features/builder.py",
+222
+],
+"l_entropy": [
+"src/features/builder.py",
+231
+],
+"l_type_token": [
+"src/features/builder.py",
+232
+],
+"l_pron_12_vs_3": [
+"src/features/builder.py",
+235
+],
+"l_fillers": [
+"src/features/builder.py",
+236
+],
+"l_silence": [
+"src/features/builder.py",
+238
+],
+"l_word_len": [
+"src/features/builder.py",
+239
+],
+"e_laugh_max": [
+"src/features/builder.py",
+251
+],
+"e_laugh_mean": [
+"src/features/builder.py",
+251
+],
+"e_applause_max": [
+"src/features/builder.py",
+251
+],
+"e_applause_mean": [
+"src/features/builder.py",
+251
+],
+"e_cheering_max": [
+"src/features/builder.py",
+251
+],
+"e_cheering_mean": [
+"src/features/builder.py",
+251
+],
+"e_music_max": [
+"src/features/builder.py",
+251
+],
+"e_music_mean": [
+"src/features/builder.py",
+251
+],
+"e_speech_max": [
+"src/features/builder.py",
+251
+],
+"e_speech_mean": [
+"src/features/builder.py",
+251
+],
+"e_laugh_tail": [
+"src/features/builder.py",
+255
+],
+"e_laugh_after": [
+"src/features/builder.py",
+256
+],
+"e_applause_after": [
+"src/features/builder.py",
+257
+],
+"e_laugh_frac": [
+"src/features/builder.py",
+254
+]
+}
+}

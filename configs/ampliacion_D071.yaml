@@ -1,0 +1,67 @@
+# Ampliacion D-071: videos extra SOLO para entrenamiento (consultas nuevas). Hereda de default.yaml (un solo nivel de extends).
+extends: configs/default.yaml
+transcribe:
+  device: cuda
+  compute_type: auto
+  model_dataset: base
+  model_inference: medium
+  compute_type_inference: int8_float32
+  cpu_threads: 8
+  beam_size: 1
+  vad_filter: true
+  language: null
+features:
+  device: cuda
+  speech_embed:
+    enabled: true
+    model: facebook/hubert-base-ls960
+    layer: 10
+    chunk_s: 10.0
+    batch_size: 1
+    n_components: 32
+  groups:
+  - K
+  - S
+  - A
+  - H
+  - F
+  - E
+  - L
+  - U
+  sentiment_model: lxyuan/distilbert-base-multilingual-cased-sentiments-student
+  sentiment_batch: 64
+  audio_hop: 512
+  hook_window_s: 3.0
+  hook_words: 15
+dataset_youtube:
+  per_query: 40
+  target_videos:
+    es: 450
+    en: 446
+  queries:
+    es:
+    - podcast de psicologia y relaciones episodio completo
+    - entrevista completa a cantante
+    - podcast de negocios y ventas en espanol
+    - charla completa de motivacion
+    - podcast de deportes y entrenamiento
+    - entrevista completa a politico
+    - podcast de cine y series episodio completo
+    - podcast de espiritualidad y desarrollo personal
+    - podcast de medicina y salud en espanol
+    - conversacion larga con youtuber
+    - podcast de videojuegos episodio completo
+    - entrevista larga a empresario
+    en:
+    - self improvement podcast full episode
+    - celebrity interview long form
+    - sports podcast full episode
+    - entrepreneurship interview full length
+    - health and medicine podcast long
+    - gaming podcast full episode
+    - movie and tv podcast full episode
+    - comedian interview full podcast
+    - spirituality and mindfulness talk full
+    - economics and finance podcast full episode
+    - musician interview full length
+    - startup founder interview full

@@ -1,0 +1,90 @@
+====================================================================================================
+VIDEO l_-igAkbVII: 100 ventanas -> 5 clips elegidos SOLO con contenido
+  Clip #1   34.9- 35.4 min   score 98/99   raw 1.044   TOCA PICO
+  Clip #2    8.6-  9.1 min   score 88/99   raw 0.949   TOCA PICO
+  Clip #3    4.0-  4.5 min   score 86/99   raw 0.941   fuera
+  Clip #4   29.8- 30.3 min   score 86/99   raw 0.940   TOCA PICO
+  Clip #5   44.5- 45.0 min   score 69/99   raw 0.863   TOCA PICO
+  -> 4/5 clips sobre un pico real de YouTube
+
+  Por que se eligio el clip #1 (17 variables):
+            variable  valor  puntaje_0_99   peso  aporte
+       a_pause_ratio  0.246            99  0.180   0.180
+           l_silence  0.245            96  0.163   0.159
+    a_long_pauses_pm  1.979            94  0.148   0.140
+           a_rms_std  1.204            92  0.122   0.113
+       a_pitch_range 21.562            98  0.112   0.110
+      a_voiced_ratio  0.666             7 -0.107  -0.007
+       k_keybert_sim  0.725            77  0.102   0.080
+       e_speech_mean  0.656             4 -0.101  -0.004
+    k_noun_chunks_ps  6.000            31 -0.098  -0.031
+       a_speech_rate  2.276             5 -0.098  -0.005
+         a_pitch_std  5.202            97  0.089   0.087
+         e_music_max  0.841            95  0.083   0.080
+          a_rms_mean -0.193            15 -0.082  -0.012
+        e_music_mean  0.131            93  0.067   0.063
+       f_n_sentences  2.000            30  0.060   0.018
+      s_questions_pm  0.000            43  0.058   0.025
+     s_second_person  0.014            86  0.056   0.049
+  suma de aportes = raw = 1.045
+
+====================================================================================================
+VIDEO UIC10AA34YU: 100 ventanas -> 5 clips elegidos SOLO con contenido
+  Clip #1   48.5- 49.3 min   score 98/99   raw 1.043   TOCA PICO
+  Clip #2   61.4- 62.1 min   score 92/99   raw 0.981   TOCA PICO
+  Clip #3   65.0- 65.7 min   score 86/99   raw 0.936   TOCA PICO
+  Clip #4   70.7- 71.4 min   score 84/99   raw 0.924   fuera
+  Clip #5   36.4- 37.1 min   score 82/99   raw 0.911   TOCA PICO
+  -> 4/5 clips sobre un pico real de YouTube
+
+  Por que se eligio el clip #1 (17 variables):
+            variable  valor  puntaje_0_99   peso  aporte
+       a_pause_ratio  0.486            99  0.180   0.180
+           l_silence  0.500            99  0.163   0.163
+    a_long_pauses_pm  5.604            99  0.148   0.147
+           a_rms_std  1.622            99  0.122   0.122
+       a_pitch_range 19.964            48  0.112   0.054
+      a_voiced_ratio  0.444             1 -0.107  -0.001
+       k_keybert_sim  0.833            71  0.102   0.074
+       e_speech_mean  0.448             1 -0.101  -0.001
+    k_noun_chunks_ps  0.727             7 -0.098  -0.007
+       a_speech_rate  1.798             1 -0.098  -0.001
+         a_pitch_std  5.842            65  0.089   0.059
+         e_music_max  0.142            87  0.083   0.073
+          a_rms_mean -1.570             1 -0.082  -0.001
+        e_music_mean  0.078            96  0.067   0.065
+       f_n_sentences 11.000            13  0.060   0.008
+      s_questions_pm  4.203            93  0.058   0.055
+     s_second_person  0.104            97  0.056   0.055
+  suma de aportes = raw = 1.044
+
+====================================================================================================
+VIDEO 3KfZ30O2fEQ: 100 ventanas -> 5 clips elegidos SOLO con contenido
+  Clip #1    7.3-  7.7 min   score 82/99   raw 0.913   TOCA PICO
+  Clip #2   16.5- 16.8 min   score 78/99   raw 0.895   TOCA PICO
+  Clip #3   16.2- 16.5 min   score 53/99   raw 0.817   TOCA PICO
+  Clip #4   10.7- 11.0 min   score 44/99   raw 0.797   TOCA PICO
+  Clip #5    9.2-  9.5 min   score 40/99   raw 0.788   TOCA PICO
+  -> 5/5 clips sobre un pico real de YouTube
+
+  Por que se eligio el clip #1 (17 variables):
+            variable  valor  puntaje_0_99   peso  aporte
+       a_pause_ratio  0.363            96  0.180   0.174
+           l_silence  0.389            95  0.163   0.157
+    a_long_pauses_pm  9.799            99  0.148   0.148
+           a_rms_std  1.167            93  0.122   0.115
+       a_pitch_range 22.728            97  0.112   0.109
+      a_voiced_ratio  0.639             7 -0.107  -0.007
+       k_keybert_sim  0.812            93  0.102   0.096
+       e_speech_mean  0.741            22 -0.101  -0.022
+    k_noun_chunks_ps  1.286            28 -0.098  -0.027
+       a_speech_rate  2.341            11 -0.098  -0.011
+         a_pitch_std  5.779            84  0.089   0.075
+         e_music_max  0.046             3  0.083   0.002
+          a_rms_mean -0.354             8 -0.082  -0.007
+        e_music_mean  0.037             2  0.067   0.001
+       f_n_sentences  7.000            76  0.060   0.047
+      s_questions_pm  3.266            65  0.058   0.038
+     s_second_person  0.023            44  0.056   0.025
+  suma de aportes = raw = 0.913
+
